@@ -1,0 +1,19 @@
+# Set HTTP port
+quarkus.http.port=8082
+
+# OIDC Configuration
+%prod.quarkus.oidc.auth-server-url=https://www.example.test/keycloak/realms/hello-world-authz
+quarkus.oidc.client-id=app-authz-vanilla
+quarkus.oidc.credentials.secret=secret
+quarkus.oidc.tls.verification=none
+
+# Enable Policy Enforcement
+quarkus.keycloak.policy-enforcer.enable=true
+
+# Exclude public API endpoint from policy enforcement
+quarkus.keycloak.policy-enforcer.paths.1.path=/api/public
+quarkus.keycloak.policy-enforcer.paths.1.enforcement-mode=DISABLED
+
+# Tell Dev Services for Keycloak to import the realm file
+# This property is not effective when running the application in JVM or Native modes
+quarkus.keycloak.devservices.realm-path=quarkus-realm.json
